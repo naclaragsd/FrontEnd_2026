@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <!--permite a utilização de acentos e caracteres especiais-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--responsividade-->
+    <title>Selection Sort</title>
+
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f6f8;
+        color: #333333;
+      }
+
+      header {
+        background-color: #321d35;
+        color: white;
+        text-align: center;
+        padding: 25px;
+      }
+
+      footer {
+        background-color: #321d35;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 40px;
+      }
+
+      nav {
+        background-color: #444;
+        padding: 12px;
+        text-align: center;
+      }
+
+      nav a {
+        color: rgb(241, 208, 208);
+        margin: 0 15px;
+        font-weight: bold;
+      }
+
+      nav a:hover {
+        color: #2d013f; /*muda de cor quando o mouse passa em cima do link*/
+      }
+
+      section {
+        background-color: rgb(229, 207, 238);
+        max-width: 900px; /*largura max da seção*/
+        margin: 30px auto; /*espaço em cima e em baixo, deixa a seção no centro da página*/
+        padding: 25px; /*não deixa o texto grudado na borda branca*/
+        border-radius: 8px; /*arredonda borda*/
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.88); /*sombra*/
+      }
+
+      h2 {
+        border-left: 5px solid #331b46; /*linha verticcal na esquerda*/
+        padding-left: 10px; /*espaço entre linha e texto*/
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse; /*junta as linhas (para não ficarem duplicadas)*/
+        margin-top: 15px;
+      }
+
+      th {
+        background-color: #321d35;
+        color: white;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+
+      tr:nth-child(even) {
+        /*seleciona as linhas (tr) que são pares*/
+        background-color: #f8e9f8;
+      }
+
+      pre {
+        background-color: #1e1e1e;
+        color: #00ff88;
+        padding: 15px;
+        overflow-x: auto; /*se o código ficar maior que a largura da tela, vai criar uma barra de rolagem horizontal*/
+        border-radius: 6px; /*arredonda a borda*/
+      }
+
+      ul {
+        padding-left: 20px;
+      }
+
+      form input,
+      form select,
+      form textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      h3 {
+        background-color: plum;
+        margin-bottom: 20px;
+        padding: 10px;
+      }
+
+      mark {
+        background-color: #e98ef1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Selection Sort</h1>
+      <p>Material de estudo digital - Engenharia de Software</p>
+    </header>
+
+    <nav>
+      <a href="#conceito">Conceito</a>
+      <a href="#exemplo">Exemplo</a>
+      <a href="#codigo">Código</a>
+      <a href="#codexplicacao">Explicação do código</a>
+      <a href="#avaliacao">Avaliação</a>
+      <a href="#referencia">Referência</a>
+    </nav>
+
+    <hr />
+
+    <section id="conceito">
+      <h2>O que é Selection Sort</h2>
+
+      <p>
+        O Selection Sort é um algoritmo de ordenação que divide o vetor em duas
+        partes: uma parte já ordenada e outra ainda não ordenada. A cada
+        iteração, ele procura o menor elemento da parte não ordenada e o coloca
+        na posição correta, realizando uma troca.
+      </p>
+    </section>
+
+    <section id="exemplo">
+      <h2>Exemplo passo a passo</h2>
+
+      <p>
+        <strong><mark>VETOR INICIAL:</mark></strong>
+      </p>
+      <p><strong>5 3 8 4 2</strong></p>
+
+      <ol>
+        <li>Menor número é 2 -> troca com 5</li>
+        <li>Depois procura o menor entre os restantes</li>
+        <li>Repete até ordenar tudo</li>
+      </ol>
+
+      <p>
+        <strong><mark>RESULTADO FINAL:</mark></strong>
+      </p>
+      <p><strong>2 3 4 5 8</strong></p>
+    </section>
+
+    <section>
+      <h2>Tabela de Iterações</h2>
+
+      <table>
+        <tr>
+          <th>Iteração</th>
+          <th>Vetor</th>
+        </tr>
+        <tr>
+          <td>inicial</td>
+          <td>5 3 8 4 2</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2 3 8 4 5</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>2 3 8 4 5</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>2 3 4 8 5</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>2 3 4 5 8</td>
+        </tr>
+      </table>
+
+      <p>
+        Na segunda iteração, não houve troca porque o elemento na posição já era
+        o menor da parte não ordenada. Mesmo assim, o algoritmo percorre o vetor
+        para confirmar isso.
+      </p>
+    </section>
+
+    <section id="codigo">
+      <h2>Código em C++</h2>
+
+      <pre> <!--escreve no site exatamente como está no codigo (incluindo quebra de linhas)-->
+        #include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int vetor[5] = {5, 3, 8, 4, 2};
+    int i, j, min, temp;
+
+    for(i = 0; i < 4; i++) {
+        min = i;
+
+        for(j = i + 1; j < 5; j++) {
+            if(vetor[j] < vetor[min]) {
+                min = j;
+            }
+        }
+
+        temp = vetor[i];
+        vetor[i] = vetor[min];
+        vetor[min] = temp;
+    }
+
+    for(i = 0; i < 5; i++) {
+        cout << vetor[i] << " ";
+    }
+
+    return 0;
+}
+      </pre>
+    </section>
+
+    <section id="codexplicacao">
+      <h2>Explicação do código</h2>
+
+      <p>
+        cria um <mark>vetor</mark> de 5 posições do tipo inteiro<br />
+        cria quatro variáveis: <br />
+        <mark>"i"</mark> controla o primeiro laço (posição atual)<br />
+        <mark>"j"</mark> percorre a parte não ordenada<br />
+        <mark>"min"</mark> guarda o índice do menor elemento encontrado<br />
+        <mark>"temp"</mark> é a variável temporária para fazer a troca<br />
+      </p>
+
+      <h3>primeiro for:</h3>
+
+      <p>
+        Esse laço, controla as iterações do Selection Sort; Temos 5 elementos e
+        precisamos de apenas 4 iterações <mark>(n-1)</mark>; A cada volta,
+        fixamos uma posição e vamos encontrar o menor valor para colocar nela
+        <br />
+        Depois assumimos que o menor elemento é o que está na posição atual
+      </p>
+      <br />
+
+      <h3>segundo for:</h3>
+
+      <p>
+        Percorre a parte ainda não ordenada, começa em <mark>"i+1"</mark> por
+        conta que não precisamos comparar o elemento com ele mesmo.
+      </p>
+      <br />
+
+      <h3>comparação:</h3>
+
+      <p>
+        O elemento atual é menor do que eu conheço?<br />
+        se for: atualizamos o índice do <mark>menor elemento</mark><br />
+      </p>
+
+      <h3>troca:</h3>
+
+      <ol>
+        <li>
+          Guarda o vetor do <mark>"vetor[i]"</mark> em <mark>"temp"</mark>
+        </li>
+        <li>Coloca o <mark>menor</mark> na posição <mark>"i"</mark></li>
+        <li>
+          Coloca o valor <mark>antigo</mark> na posição do <mark>menor</mark>
+        </li>
+        <br />
+      </ol>
+
+      <p>sem "temp" você perderia um dos valores.</p>
+
+      <h3>Imprimindo o vetor ordenado:</h3>
+
+      <p>
+        <mark>"for(i = 0; i < 5; i++)"</mark> percorre o vetor inteiro <br />
+        <mark>"cout << vetor[i] << " ";"</mark> imprime cada número separado por
+        espaço<br />
+      </p>
+    </section>
+
+    <section>
+      <h2>Vantagens e Desvantagens</h2>
+
+      <ul>
+        <li>
+          ✅<ins><i>fácil de entender</i></ins>
+        </li>
+        <li>
+          ✅<ins><i>fácil de implementar</i></ins>
+        </li>
+        <li>
+          ❌<ins><i>não é eficiente para grandes volumes de dados</i></ins>
+        </li>
+        <li>
+          ❌<ins><i>complexidade o(n²)</i></ins>
+        </li>
+      </ul>
+    </section>
+
+    <hr />
+
+    <section id="avaliacao">
+      <h2>Avaliação do conteúdo</h2>
+
+      <form>
+        <label>Nome: </label><br />
+        <input type="text" /><br /><br />
+
+        <label>você entendeu o conteúdo?</label><br />
+        <input type="radio" name="entendeu" /> Sim
+        <input type="radio" name="entendeu" /> Mais ou menos
+        <input type="radio" name="entendeu" /> Não<br /><br />
+
+        <label>Qual nota você dá para o material?</label><br />
+
+        <select>
+          <option>10</option>
+          <option>9</option>
+          <option>8</option>
+          <option>7</option>
+          <option>6 ou menos</option>
+        </select>
+
+        <br /><br />
+
+        <label>Deixe um comentário:</label><br />
+        <textarea rows="4" cols="40"></textarea><br /><br />
+
+        <input type="submit" value="Enviar Avaliação" />
+      </form>
+    </section>
+
+    <section id="referencia">
+      <h2>Referência</h2>
+
+      <p>
+        conteúdo inspirado nas notas de aula de Algoritmos do instituto de
+        matemática e estatística da USP (IME-USP).
+      </p>
+
+      <p>
+        Disponível em:
+        <a
+          href="https://www.ime.usp.br/~pf/algoritmos/aulas/ordena.html"
+          target="_blank"
+        >
+          https://www.ime.usp.br/~pf/algoritmos/aulas/ordena.html
+        </a>
+      </p>
+    </section>
+
+    <footer>
+      <p>Desenvolvido por Ana Clara - Engenharia de Software</p>
+    </footer>
+  </body>
+</html>
