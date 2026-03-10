@@ -1,0 +1,278 @@
+:root {
+  --cor-principal: #8b5cf6;
+  --pagina: #0f0f0f;
+  --card: #111;
+  --section: #1a1a1a;
+  --texto: #e6e6e6;
+  --texto-secundario: #bfbfbf;
+  --borda: #333;
+  --input: #0d0d0d;
+  --code: #000;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--pagina);
+  color: var(--texto);
+  padding: 20px;
+  line-height: 1.6; /*espaço entre linhas de texto*/
+}
+
+html {
+  scroll-behavior: smooth; /*quando clica no link a página desliza devagar até a seção*/
+}
+
+#pagina {
+  max-width: 1000px;
+  margin: auto;
+}
+
+#topo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+#topo h1 {
+  color: var(--cor-principal);
+  margin-bottom: 5px;
+}
+
+#topo p {
+  color: var(--texto-secundario);
+  font-style: italic;
+}
+
+section {
+  background-color: var(--section);
+  padding: 25px;
+  text-align: left;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+h2 {
+  border-bottom: 2px solid var(--cor-principal);
+  padding-bottom: 10px;
+  margin-top: 0;
+  color: var(--cor-principal);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 15px;
+  margin-bottom: 40px;
+  background: var(--card);
+  border-radius: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--texto);
+  font-weight: bold;
+  padding: 6px 10px;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: var(--cor-principal);
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+input[type="text"],
+input[type="url"],
+select {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="color"] {
+  height: 34px;
+  width: 60px;
+  padding: 0;
+  border: none;
+}
+
+input[type="submit"] {
+  background: var(--cor-principal);
+  color: white;
+  border: none;
+  padding: 10px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background: #6d45d8;
+}
+
+article,
+article p {
+  margin-top: 15px;
+  padding: 18px;
+  border: 1px solid var(--borda);
+  background: var(--card);
+  border-radius: 10px;
+}
+
+aside {
+  margin-top: 15px;
+  padding: 15px;
+  background: var(--card);
+  border-left: 4px solid var(--cor-principal);
+  border-radius: 8px;
+}
+
+blockquote {
+  border-left: 4px solid var(--cor-principal);
+  padding-left: 10px;
+  color: var(--texto-secundario);
+  font-style: italic;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid var(--borda);
+  padding: 10px;
+  text-align: center;
+}
+
+tr:hover {
+  background: var(--card);
+}
+
+th {
+  background: var(--card);
+  color: var(--cor-principal);
+}
+
+code {
+  padding: 5px 8px;
+  font-family: "Courier New", monospace;
+  background: var(--code);
+  border-radius: 4px;
+  border-left: 3px solid var(--cor-principal);
+}
+
+pre {
+  background: var(--code);
+  padding: 15px;
+  border-radius: 6px;
+  overflow: auto;
+  border-left: 5px solid var(--cor-principal);
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+header h1 {
+  color: var(--cor-principal);
+  margin-bottom: 8px;
+}
+
+header p {
+  color: var(--texto-secundario);
+  font-style: italic;
+}
+
+article h3 {
+  color: var(--cor-principal);
+  margin-top: 0;
+}
+
+details {
+  margin-top: 10px;
+  background: var(--input);
+  padding: 10px;
+  border-radius: 6px;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--cor-principal);
+}
+
+abbr {
+  border-bottom: 1px dotted var(--cor-principal);
+  cursor: help;
+}
+
+form {
+  margin-top: 15px;
+}
+
+fieldset {
+  border: 1px solid var(--borda);
+  padding: 20px;
+  border-radius: 10px;
+  background: var(--card);
+}
+
+legend {
+  color: var(--cor-principal);
+  font-weight: bold;
+  padding: 0 8px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 12px;
+  border-radius: 5px;
+  border: 1px solid var(--borda);
+  background: var(--input);
+  color: var(--texto);
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+footer {
+  margin-top: 50px;
+  padding: 25px;
+  background: var(--card);
+  border-top: 2px solid var(--cor-principal);
+  text-align: center;
+  border-radius: 10px;
+}
+
+footer p {
+  margin: 6px 0;
+}
+
+footer address {
+  font-style: normal;
+  color: var(--texto-secundario);
+}
+
+* {
+  box-sizing: border-box;
+}
