@@ -1,0 +1,202 @@
+<html lang="pt-BR">
+  <!--cérebro invisível, nada daqui aparece diretamente na tela-->
+  <head>
+    <!--importa framework de css dasyUi-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!--importa fonte-->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--tailwind para daisyUI-->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!--permite usar acentos-->
+    <meta charset="UTF-8" />
+    <title>MEU BIXINHO VIRTUAL!</title>
+
+    <!--css dentro do html-->
+    <style>
+      body {
+        background-image: url(fundo_.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      #mainImage {
+        width: 500px;
+        height: 500px;
+        object-fit: contain;
+        pointer-events: auto;
+        position: relative;
+        z-index: 20;
+      }
+
+      #overlay {
+        position: fixed;
+        inset: 0;
+        background-image: url(fundo_noite.png);
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1s ease;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .noite #overlay {
+        opacity: 1;
+      }
+
+      #estrelas {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+        z-index: 1;
+      }
+
+      .noite #estrelas {
+        opacity: 1;
+      }
+
+      .estrela {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+        animation: piscar 2s infinite alternate;
+        animation-delay: var(--delay);
+      }
+
+      #nomeBixinho {
+        font-family: "Quicksand", sans-serif;
+        color: #ffffff;
+
+        text-shadow:
+          2px 2px 4px rgba(0, 0, 0, 0.7),
+          0 0 10px rgba(255, 255, 255, 0.5);
+
+        letter-spacing: 1px;
+      }
+
+      /*cria animação estrela*/
+      @keyframes piscar {
+        from {
+          opacity: 0.2;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* aqui significa "pegue um elemento da classe estrela que está dentro da classe noite */
+      .noite .estrela {
+        animation:
+          piscar 2s infinite alternate,
+          surgir 1s ease forwards;
+
+        /* chama a variável
+        tem dois valores, pq tem duas animações (piscar e surgir) */
+
+        animation-delay: var(--delay), var(--delay);
+      }
+
+      /* pega o elemento com id overlay que está dentro de um elemento com a classe fundo triste*/
+      .fundoTriste #overlay {
+        opacity: 1;
+        filter: grayscale(100%) brightness(0.5);
+      }
+
+      /* animação de aparecer fundo */
+      @keyframes surgir {
+        from {
+          transform: scale(0);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+
+  <!--conteúdo da pagina-->
+  <body
+    class="relative min-h-screen flex items-center justify-center overflow-hidden"
+  >
+    <!--div organiza os elementos na pagina
+    esse div id significa que é um estilo único que não vai se repetir
+    utiliza # pra chamar ele no css-->
+    <div id="overlay"></div>
+    <div id="estrelas"></div>
+
+    <!--essa div class é um estilo que vai se repetir, ser utilizado em vários elementos iguais
+    usa . para chamar ele no css-->
+    <div class="flex items-center gap-10 relative z-10">
+      <div class="flex items-center gap-4 self-start mt-[10px]">
+        <div class="avatar">
+          <div
+            class="w-20 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2"
+          >
+            <img src="bixinho__3.png" />
+          </div>
+        </div>
+
+        <!--campo de texto para colocar o nome-->
+        <input
+          id="inputNome"
+          type="text"
+          placeholder="Nome do bixinho..."
+          class="input input-secondary text-lg w-[180px]"
+        />
+      </div>
+
+      <!--titulo mostrando o nome-->
+      <div class="flex flex-col items-center justify-center">
+        <h2 id="nomeBixinho" class="text-2xl font-bold text-white mb-2">
+          Seu bixinho 🐾
+        </h2>
+
+        <!--imagem-->
+        <img id="mainImage" src="bixinho.png" class="w-[500px]" />
+      </div>
+    </div>
+
+    <!--imagem do cookie que funciona como botao (btnimage)
+    + classe que vai fazer a animação + onclick executa a função alimentar no js-->
+    <img
+      id="btnImage"
+      src="cookie.png"
+      class="w-[150px] fixed z-[999] cursor-pointer transition-all duration-300 active:scale-95"
+      onclick="alimentar()"
+    />
+
+    <!--botao para mudar dia e noite-->
+    <label class="flex items-center gap-3 cursor-pointer mt-4 relative z-20">
+      <span>🌙</span>
+
+      <input type="checkbox" class="toggle toggle-primary" id="toggleTema" />
+
+      <span>☀️</span>
+    </label>
+
+    <img
+      id="ferlini"
+      src="ferlini.png"
+      class="hidden fixed bottom-4 right-4 w-[120px] z-[999]"
+    />
+
+    <script src="script.js"></script>
+  </body>
+</html>
