@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>créditos para eventos</title>
+    <link rel="stylesheet" href="exercicio6.css" />
+  </head>
+  <body>
+    <div class="card">
+      <h1>infinity bank eventos</h1>
+
+      <label>pacote:</label>
+
+      <select id="pacote">
+        <option value="50">standard</option>
+        <option value="80">premium</option>
+        <option value="120">infinity deluxe</option>
+      </select>
+
+      <label>quantidade de pessoas: </label>
+      <input type="number" id="pessoas" />
+
+      <button id="btnCalcular">calcular orçamento</button>
+
+      <div class="resultado">
+        <p id="bruto"></p>
+        <p id="taxa"></p>
+        <p id="desconto"></p>
+        <p id="total"></p>
+      </div>
+    </div>
+    <script src="exercicio6.js"></script>
+  </body>
+</html>
